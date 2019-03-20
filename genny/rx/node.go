@@ -15,9 +15,7 @@ func checkNode(opts *Options) genny.RunFn {
 		helpers.Header(opts.Out, "Checking Node")
 		ctx := helpers.Context(opts)
 		if _, err := r.LookPath("node"); err != nil {
-			if opts.App.InApp && opts.App.WithNodeJs {
-				return opts.render("missing_node.plush", ctx)
-			}
+			return opts.render("missing_node.plush", ctx)
 		}
 		bb := &bytes.Buffer{}
 		c := exec.Command("node", "--version")
@@ -43,16 +41,14 @@ func checkYarn(opts *Options) genny.RunFn {
 		helpers.Header(opts.Out, "Checking YARN")
 		ctx := helpers.Context(opts)
 		if _, err := r.LookPath("yarn"); err != nil {
-			if opts.App.InApp && opts.App.WithNodeJs && opts.App.WithYarn {
-				return opts.render("missing_yarn.plush", ctx)
-			}
+			return opts.render("missing_yarn.plush", ctx)
 		}
 		bb := &bytes.Buffer{}
 		c := exec.Command("yarn", "--version")
 		c.Stdout = bb
 		c.Stderr = bb
 		if err := r.Exec(c); err != nil {
-			return err
+			return helpers.Render(opts.Out, bb.String(), ctx)
 		}
 		v, err := semver.NewVersion(strings.TrimSpace(bb.String()))
 		if err != nil {
@@ -74,16 +70,14 @@ func checkNpm(opts *Options) genny.RunFn {
 		helpers.Header(opts.Out, "Checking NPM")
 		ctx := helpers.Context(opts)
 		if _, err := r.LookPath("npm"); err != nil {
-			if opts.App.InApp && opts.App.WithNodeJs {
-				return opts.render("missing_npm.plush", ctx)
-			}
+			return opts.render("missing_npm.plush", ctx)
 		}
 		bb := &bytes.Buffer{}
 		c := exec.Command("npm", "--version")
 		c.Stdout = bb
 		c.Stderr = bb
 		if err := r.Exec(c); err != nil {
-			return err
+			return helpers.Render(opts.Out, bb.String(), ctx)
 		}
 		v, err := semver.NewVersion(strings.TrimSpace(bb.String()))
 		if err != nil {
