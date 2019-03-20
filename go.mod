@@ -14,7 +14,6 @@ require (
 	github.com/gobuffalo/uuid v2.0.5+incompatible // indirect
 	github.com/gobuffalo/validate v2.0.3+incompatible // indirect
 	github.com/gofrs/uuid v3.2.0+incompatible // indirect
-	github.com/kr/pty v1.1.3 // indirect
 	github.com/markbates/inflect v1.0.4 // indirect
 	github.com/mattn/go-colorable v0.1.1 // indirect
 	github.com/mattn/go-isatty v0.0.7 // indirect
