@@ -1,0 +1,3 @@
+<%= success() { %>
+Your version of Go, <%= version %>, meets the minimum requirements for Buffalo.
+<% } %>

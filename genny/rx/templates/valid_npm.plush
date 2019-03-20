@@ -1,0 +1,3 @@
+<%= success() { %>
+Your version of npm, <%= npm %>, meets the minimum requirements for Buffalo.
+<% } %>

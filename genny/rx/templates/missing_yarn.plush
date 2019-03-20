@@ -1,0 +1,7 @@
+<%= error() { %>
+Your app requires yarn, but it is currently not installed.
+<% } %>
+
+Minimum versions of yarn are:
+
+* v1.12.x - https://yarnpkg.com/en/

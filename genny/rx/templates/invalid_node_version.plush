@@ -1,0 +1,7 @@
+<%= error() { %>
+You Node version, <%= node %>, does not meet the minimum requirements for Buffalo.
+<% } %>
+
+Minimum versions of Node are:
+
+* v11.x - https://nodejs.org/en/docs/

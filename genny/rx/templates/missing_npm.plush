@@ -1,0 +1,3 @@
+<%= error() { %>
+Your app requires npm, but it is currently not installed.
+<% } %>

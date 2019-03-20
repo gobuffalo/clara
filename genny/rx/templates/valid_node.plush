@@ -1,0 +1,3 @@
+<%= success() { %>
+Your version of Node, <%= node %>, meets the minimum requirements for Buffalo.
+<% } %>

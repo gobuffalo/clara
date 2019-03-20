@@ -1,0 +1,3 @@
+<%= success() { %>
+You are using <%= pkg %> (`<%= exec %>`) for package management.
+<% } %>

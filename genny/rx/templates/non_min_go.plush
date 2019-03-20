@@ -1,0 +1,9 @@
+<%= error() { %>
+You version of Go, <%= version %>, does not meet the minimum requirements for Buffalo.
+<% } %>
+
+Minimum versions of Go are:
+
+* 1.10.8
+* 1.11.4
+* 1.12.x

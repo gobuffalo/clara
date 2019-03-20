@@ -1,0 +1,5 @@
+<%= error() { %>
+The `go` executable could not be found on your system.
+<% } %>
+
+Visit https://www.gopherguides.com/courses/preparing-your-environment-for-go-development/ for more information on how to setup Go for development.

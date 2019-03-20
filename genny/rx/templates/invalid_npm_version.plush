@@ -1,0 +1,7 @@
+<%= error() { %>
+Your npm version, <%= npm %>, does not meet the minimum requirements for Buffalo.
+<% } %>
+
+Minimum versions of npm are:
+
+* v6.7.0 - https://docs.npmjs.com

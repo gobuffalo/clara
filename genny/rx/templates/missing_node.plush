@@ -1,0 +1,7 @@
+<%= error() { %>
+Your app requires Node, but it is currently not installed.
+<% } %>
+
+Minimum versions of Node are:
+
+* v11.x - https://nodejs.org/en/docs/

@@ -1,0 +1,3 @@
+<%= success() { %>
+Your version of yarn, <%= yarn %>, meets the minimum requirements for Buffalo.
+<% } %>

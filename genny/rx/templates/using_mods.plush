@@ -1,0 +1,3 @@
+<%= success() { %>
+You are using Go Modules, so no need to worry about the GOPATH.
+<% } %>

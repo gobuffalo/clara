@@ -1,0 +1,11 @@
+<%= error() { %>
+You do not appear to be operating inside of your GOPATH.
+<% } %>
+Things to check:
+
+* Capitalization - make sure that your capitalization of <%= GOPATH %> matches that of <%= opts.App.Pwd %>
+* `src` - make sure that you are working under <%= GOPATH %>/src
+
+GOPATH: <%= GOPATH %>
+PWD: <%= opts.App.Pwd %>
+Build Sources: <%= join(sources, ", ") %>

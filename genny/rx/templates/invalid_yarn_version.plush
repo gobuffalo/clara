@@ -1,0 +1,7 @@
+<%= error() { %>
+Your yarn version, <%= yarn %>, does not meet the minimum requirements for Buffalo.
+<% } %>
+
+Minimum versions of yarn are:
+
+* v1.12.x - https://yarnpkg.com/en/

@@ -1,0 +1,8 @@
+<%= warning() { %>
+You do not appear to be using a package management system.
+<% } %>
+
+It is strongly suggested that you use one of the following package management systems:
+
+* Go Modules (Recommended) - https://gobuffalo.io/en/docs/gomods
+* Dep - https://github.com/golang/dep
