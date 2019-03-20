@@ -2,6 +2,7 @@ package rx
 
 import (
 	"bytes"
+	"path/filepath"
 	"testing"
 
 	"github.com/gobuffalo/doctor/genny/helpers"
@@ -13,8 +14,8 @@ import (
 func Test_checkPath_Valid(t *testing.T) {
 	r := require.New(t)
 	envy.Temp(func() {
-		envy.Set("PATH", "/foo/bin")
-		envy.Set("GOPATH", "/foo")
+		envy.Set("PATH", filepath.Join("foo", "bin"))
+		envy.Set("GOPATH", "foo")
 
 		run := gentest.NewRunner()
 
