@@ -4,7 +4,7 @@ import (
 	"path/filepath"
 	"strings"
 
-	"github.com/gobuffalo/doctor/genny/helpers"
+	"github.com/gobuffalo/clara/genny/helpers"
 	"github.com/gobuffalo/envy"
 	"github.com/gobuffalo/genny"
 )

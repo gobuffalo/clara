@@ -5,7 +5,7 @@ import (
 	"os"
 	"runtime"
 
-	"github.com/gobuffalo/doctor/genny/helpers"
+	"github.com/gobuffalo/clara/genny/helpers"
 	"github.com/gobuffalo/meta"
 	"github.com/gobuffalo/plush"
 	"github.com/pkg/errors"

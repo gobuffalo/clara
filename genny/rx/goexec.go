@@ -1,7 +1,7 @@
 package rx
 
 import (
-	"github.com/gobuffalo/doctor/genny/helpers"
+	"github.com/gobuffalo/clara/genny/helpers"
 	"github.com/gobuffalo/genny"
 	"github.com/pkg/errors"
 )

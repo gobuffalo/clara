@@ -6,7 +6,7 @@ import (
 	"strings"
 
 	"github.com/Masterminds/semver"
-	"github.com/gobuffalo/doctor/genny/helpers"
+	"github.com/gobuffalo/clara/genny/helpers"
 	"github.com/gobuffalo/genny"
 )
 

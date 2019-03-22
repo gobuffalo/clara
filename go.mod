@@ -1,4 +1,6 @@
-module github.com/gobuffalo/doctor
+module github.com/gobuffalo/clara
+
+go 1.12
 
 require (
 	github.com/Masterminds/semver v1.4.2
@@ -8,7 +10,7 @@ require (
 	github.com/gobuffalo/genny v0.0.0-20190315124720-e16e52a93c79
 	github.com/gobuffalo/github_flavored_markdown v1.0.7 // indirect
 	github.com/gobuffalo/meta v0.0.0-20190320152240-a5320142224a
-	github.com/gobuffalo/packr/v2 v2.0.7
+	github.com/gobuffalo/packr/v2 v2.0.8
 	github.com/gobuffalo/plush v3.7.33+incompatible
 	github.com/gobuffalo/tags v2.0.15+incompatible // indirect
 	github.com/gobuffalo/uuid v2.0.5+incompatible // indirect

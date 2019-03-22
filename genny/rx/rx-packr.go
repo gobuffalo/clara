@@ -5,4 +5,4 @@
 // and any other packr generated files.
 package rx
 
-import _ "github.com/gobuffalo/doctor/packrd"
+import _ "github.com/gobuffalo/clara/packrd"

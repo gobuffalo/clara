@@ -5,7 +5,7 @@ import (
 	"os/exec"
 	"testing"
 
-	"github.com/gobuffalo/doctor/genny/helpers"
+	"github.com/gobuffalo/clara/genny/helpers"
 	"github.com/gobuffalo/genny/gentest"
 	"github.com/gobuffalo/meta"
 	"github.com/pkg/errors"

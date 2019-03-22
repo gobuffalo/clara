@@ -1,6 +1,6 @@
 package main
 
-import "github.com/gobuffalo/doctor/cmd"
+import "github.com/gobuffalo/clara/cmd"
 
 func main() {
 	cmd.Execute()
