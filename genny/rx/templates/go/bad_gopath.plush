@@ -9,3 +9,5 @@ Things to check:
 GOPATH: <%= GOPATH %>
 PWD: <%= opts.App.Pwd %>
 Build Sources: <%= join(sources, ", ") %>
+
+<%= partial("go/_help.plush") %>

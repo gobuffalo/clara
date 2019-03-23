@@ -12,7 +12,7 @@ import (
 	"github.com/stretchr/testify/require"
 )
 
-func Test_checkNode_InApp_Missing(t *testing.T) {
+func Test_nodeChecks_InApp_Missing(t *testing.T) {
 	r := require.New(t)
 
 	run := gentest.NewRunner()
@@ -22,7 +22,7 @@ func Test_checkNode_InApp_Missing(t *testing.T) {
 	app.InApp = true
 
 	bb := &bytes.Buffer{}
-	run.WithRun(checkNode(&Options{
+	run.With(nodeChecks(&Options{
 		Out: bb,
 		App: app,
 	}))
@@ -34,7 +34,7 @@ func Test_checkNode_InApp_Missing(t *testing.T) {
 	r.Contains(bb.String(), helpers.ERROR)
 }
 
-func Test_checkNode_InApp_Invalid_Version(t *testing.T) {
+func Test_nodeChecks_InApp_Invalid_Version(t *testing.T) {
 	r := require.New(t)
 
 	run := gentest.NewRunner()
@@ -44,25 +44,20 @@ func Test_checkNode_InApp_Invalid_Version(t *testing.T) {
 	app.InApp = true
 
 	bb := &bytes.Buffer{}
-	run.WithRun(checkNode(&Options{
+	opts := &Options{
 		Out: bb,
 		App: app,
-	}))
+	}
+	opts.Versions.Store("node", "0.0.1")
+	run.With(nodeChecks(opts))
 	run.LookPathFn = func(s string) (string, error) {
 		return s, nil
 	}
-	run.ExecFn = func(cmd *exec.Cmd) error {
-		if cmd.Stdout != nil {
-			cmd.Stdout.Write([]byte("v10.9.0"))
-		}
-		return nil
-	}
-
 	r.NoError(run.Run())
 	r.Contains(bb.String(), helpers.ERROR)
 }
 
-func Test_checkNode_InApp_Valid_Version(t *testing.T) {
+func Test_nodeChecks_InApp_Valid_Version(t *testing.T) {
 	r := require.New(t)
 
 	run := gentest.NewRunner()
@@ -72,7 +67,7 @@ func Test_checkNode_InApp_Valid_Version(t *testing.T) {
 	app.InApp = true
 
 	bb := &bytes.Buffer{}
-	run.WithRun(checkNpm(&Options{
+	run.With(npmChecks(&Options{
 		Out: bb,
 		App: app,
 	}))
@@ -90,7 +85,7 @@ func Test_checkNode_InApp_Valid_Version(t *testing.T) {
 	r.Contains(bb.String(), helpers.SUCCESS)
 }
 
-func Test_checkNpm_InApp_Missing(t *testing.T) {
+func Test_npmChecks_InApp_Missing(t *testing.T) {
 	r := require.New(t)
 
 	run := gentest.NewRunner()
@@ -100,7 +95,7 @@ func Test_checkNpm_InApp_Missing(t *testing.T) {
 	app.InApp = true
 
 	bb := &bytes.Buffer{}
-	run.WithRun(checkNpm(&Options{
+	run.With(npmChecks(&Options{
 		Out: bb,
 		App: app,
 	}))
@@ -112,7 +107,7 @@ func Test_checkNpm_InApp_Missing(t *testing.T) {
 	r.Contains(bb.String(), helpers.ERROR)
 }
 
-func Test_checkNpm_InApp_Invalid_Version(t *testing.T) {
+func Test_npmChecks_InApp_Invalid_Version(t *testing.T) {
 	r := require.New(t)
 
 	run := gentest.NewRunner()
@@ -122,25 +117,20 @@ func Test_checkNpm_InApp_Invalid_Version(t *testing.T) {
 	app.InApp = true
 
 	bb := &bytes.Buffer{}
-	run.WithRun(checkNpm(&Options{
+	opts := &Options{
 		Out: bb,
 		App: app,
-	}))
+	}
+	opts.Versions.Store("npm", "0.0.1")
+	run.With(npmChecks(opts))
 	run.LookPathFn = func(s string) (string, error) {
 		return s, nil
 	}
-	run.ExecFn = func(cmd *exec.Cmd) error {
-		if cmd.Stdout != nil {
-			cmd.Stdout.Write([]byte("v6.5.0"))
-		}
-		return nil
-	}
-
 	r.NoError(run.Run())
 	r.Contains(bb.String(), helpers.ERROR)
 }
 
-func Test_checkNpm_InApp_Valid_Version(t *testing.T) {
+func Test_npmChecks_InApp_Valid_Version(t *testing.T) {
 	r := require.New(t)
 
 	run := gentest.NewRunner()
@@ -150,25 +140,20 @@ func Test_checkNpm_InApp_Valid_Version(t *testing.T) {
 	app.InApp = true
 
 	bb := &bytes.Buffer{}
-	run.WithRun(checkNpm(&Options{
+	opts := &Options{
 		Out: bb,
 		App: app,
-	}))
+	}
+	opts.Versions.Store("npm", "v6.5.0")
+	run.With(npmChecks(opts))
 	run.LookPathFn = func(s string) (string, error) {
 		return s, nil
 	}
-	run.ExecFn = func(cmd *exec.Cmd) error {
-		if cmd.Stdout != nil {
-			cmd.Stdout.Write([]byte("v6.7.0"))
-		}
-		return nil
-	}
-
 	r.NoError(run.Run())
 	r.Contains(bb.String(), helpers.SUCCESS)
 }
 
-func Test_checkYarn_InApp_Missing(t *testing.T) {
+func Test_yarnChecks_InApp_Missing(t *testing.T) {
 	r := require.New(t)
 
 	run := gentest.NewRunner()
@@ -179,7 +164,7 @@ func Test_checkYarn_InApp_Missing(t *testing.T) {
 	app.InApp = true
 
 	bb := &bytes.Buffer{}
-	run.WithRun(checkYarn(&Options{
+	run.With(yarnChecks(&Options{
 		Out: bb,
 		App: app,
 	}))
@@ -191,7 +176,7 @@ func Test_checkYarn_InApp_Missing(t *testing.T) {
 	r.Contains(bb.String(), helpers.ERROR)
 }
 
-func Test_checkYarn_InApp_Invalid_Version(t *testing.T) {
+func Test_yarnChecks_InApp_Invalid_Version(t *testing.T) {
 	r := require.New(t)
 
 	run := gentest.NewRunner()
@@ -202,7 +187,7 @@ func Test_checkYarn_InApp_Invalid_Version(t *testing.T) {
 	app.InApp = true
 
 	bb := &bytes.Buffer{}
-	run.WithRun(checkYarn(&Options{
+	run.With(yarnChecks(&Options{
 		Out: bb,
 		App: app,
 	}))
@@ -220,7 +205,7 @@ func Test_checkYarn_InApp_Invalid_Version(t *testing.T) {
 	r.Contains(bb.String(), helpers.ERROR)
 }
 
-func Test_checkYarn_InApp_Valid_Version(t *testing.T) {
+func Test_yarnChecks_InApp_Valid_Version(t *testing.T) {
 	r := require.New(t)
 
 	run := gentest.NewRunner()
@@ -231,7 +216,7 @@ func Test_checkYarn_InApp_Valid_Version(t *testing.T) {
 	app.InApp = true
 
 	bb := &bytes.Buffer{}
-	run.WithRun(checkYarn(&Options{
+	run.With(yarnChecks(&Options{
 		Out: bb,
 		App: app,
 	}))

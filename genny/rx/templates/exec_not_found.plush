@@ -1,0 +1,4 @@
+<%= error() { %>
+The `<%= tool.Bin %>` executable could not be found on your system.
+<% } %>
+<%= if (tool.Partial) {return partial(tool.Partial)} %>

@@ -1,4 +1,0 @@
-<%= success() { %>
-The `go` executable was found on your system at: <%= bin %>
-<% } %>
-

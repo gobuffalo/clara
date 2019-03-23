@@ -1,0 +1,3 @@
+<%= success() { %>
+Your version of <%= tool.Name %>, <%= version %>, meets the minimum requirements.
+<% } %>

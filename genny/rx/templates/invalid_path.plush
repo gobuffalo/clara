@@ -4,5 +4,5 @@ Your PATH (<%= PATH %>) does not contain <%= GOPATH %>/bin.
 
 Without <%= GOPATH %>/bin in your `PATH` any Go executables can not be run globally.
 
-Visit https://www.gopherguides.com/courses/preparing-your-environment-for-go-development/ for more information on how to setup Go for development.
+<%= partial("go/_help.plush") %>
 

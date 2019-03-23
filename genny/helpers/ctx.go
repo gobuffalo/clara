@@ -1,7 +1,6 @@
 package helpers
 
 import (
-	"io"
 	"strings"
 
 	"github.com/gobuffalo/envy"
@@ -18,15 +17,4 @@ func Context(opts interface{}) *plush.Context {
 	ctx.Set("success", Success)
 	ctx.Set("join", strings.Join)
 	return ctx
-}
-
-func Render(w io.Writer, s string, ctx *plush.Context) error {
-	s, err := plush.Render(s, ctx)
-	if err != nil {
-		return err
-	}
-	s = strings.TrimSpace(s)
-	s += "\n\n"
-	_, err = w.Write([]byte(s))
-	return err
 }

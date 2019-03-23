@@ -8,13 +8,14 @@ import (
 	"github.com/gobuffalo/clara/genny/helpers"
 	"github.com/gobuffalo/meta"
 	"github.com/gobuffalo/plush"
+	"github.com/gobuffalo/syncx"
 	"github.com/pkg/errors"
 )
 
 type Options struct {
-	App       meta.App
-	GoVersion string
-	Out       io.Writer
+	App      meta.App
+	Versions syncx.StringMap
+	Out      io.Writer
 }
 
 // Validate that options are usuable
@@ -25,9 +26,14 @@ func (opts *Options) Validate() error {
 	if opts.Out == nil {
 		opts.Out = os.Stdout
 	}
-	if len(opts.GoVersion) == 0 {
-		opts.GoVersion = runtime.Version()
+	if _, ok := opts.Versions.Load("go"); !ok {
+		opts.Versions.Store("go", runtime.Version())
 	}
+	// if opts.Versions.Map == nil {
+	// }
+	// if len(opts.GoVersion) == 0 {
+	// 	opts.GoVersion = runtime.Version()
+	// }
 	return nil
 }
 
