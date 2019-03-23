@@ -187,18 +187,14 @@ func Test_yarnChecks_InApp_Invalid_Version(t *testing.T) {
 	app.InApp = true
 
 	bb := &bytes.Buffer{}
-	run.With(yarnChecks(&Options{
+	opts := &Options{
 		Out: bb,
 		App: app,
-	}))
+	}
+	opts.Versions.Store("yarn", "v0.0.1")
+	run.With(yarnChecks(opts))
 	run.LookPathFn = func(s string) (string, error) {
 		return s, nil
-	}
-	run.ExecFn = func(cmd *exec.Cmd) error {
-		if cmd.Stdout != nil {
-			cmd.Stdout.Write([]byte("v1.1.0"))
-		}
-		return nil
 	}
 
 	r.NoError(run.Run())
