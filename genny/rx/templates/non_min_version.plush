@@ -1,5 +1,5 @@
 <%= error() { %>
-You version of <%= tool.Name %>, <%= version %>, does not meet the minimum requirements.
+Your version of <%= tool.Name %>, <%= version %>, does not meet the minimum requirements.
 <% } %>
 
 Minimum versions of <%= tool.Name %> are:

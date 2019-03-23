@@ -29,11 +29,6 @@ func (opts *Options) Validate() error {
 	if _, ok := opts.Versions.Load("go"); !ok {
 		opts.Versions.Store("go", runtime.Version())
 	}
-	// if opts.Versions.Map == nil {
-	// }
-	// if len(opts.GoVersion) == 0 {
-	// 	opts.GoVersion = runtime.Version()
-	// }
 	return nil
 }
 

@@ -17,7 +17,7 @@ func goCheck(opts *Options) *genny.Generator {
 		Bin:     "go",
 		Minimum: []string{">=1.10.8", ">=1.11.4", ">=1.12"},
 		Partial: "go/_help.plush",
-		Version: func() (string, error) {
+		Version: func(r *genny.Runner) (string, error) {
 			v, ok := opts.Versions.Load("go")
 			if !ok {
 				v = runtime.Version()

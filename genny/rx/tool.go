@@ -12,7 +12,7 @@ import (
 type Tool struct {
 	Name    string
 	Bin     string
-	Version func() (string, error)
+	Version func(*genny.Runner) (string, error)
 	Partial string
 	Minimum []string
 }
@@ -60,7 +60,7 @@ func (t Tool) Generator(opts *Options) *genny.Generator {
 
 	g.RunFn(func(r *genny.Runner) error {
 		helpers.Header(opts.Out, fmt.Sprintf("%s: Checking minimum version requirements", t.Name))
-		v, err := t.Version()
+		v, err := t.Version(r)
 		if err != nil {
 			return helpers.RenderE(opts.Out, errors.WithMessage(err, v))
 		}

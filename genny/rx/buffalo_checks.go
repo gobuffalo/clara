@@ -1,8 +1,6 @@
 package rx
 
 import (
-	"bytes"
-	"os/exec"
 	"regexp"
 	"strings"
 
@@ -17,18 +15,16 @@ func buffaloChecks(opts *Options) *genny.Generator {
 		Bin:     "buffalo",
 		Minimum: []string{">=0.14.2"},
 		Partial: "buffalo/_help.plush",
-		Version: func() (string, error) {
+		Version: func(r *genny.Runner) (string, error) {
 			if v, ok := opts.Versions.Load("buffalo"); ok {
 				return v, nil
 			}
-			bb := &bytes.Buffer{}
-			c := exec.Command("buffalo", "version")
-			c.Stdout = bb
-			c.Stderr = bb
-			if err := c.Run(); err != nil {
-				return "", err
+
+			v, err := cmdVersion(r, "buffalo", "version")
+			if err != nil {
+				return v, err
 			}
-			v := bvrx.FindString(bb.String())
+			v = bvrx.FindString(v)
 			v = strings.TrimSpace(v)
 			return v, nil
 

@@ -10,15 +10,15 @@ import (
 	"github.com/stretchr/testify/require"
 )
 
-func Test_nodeChecks_Success(t *testing.T) {
+func Test_npmChecks_Success(t *testing.T) {
 	r := require.New(t)
 
 	run := gentest.NewRunner()
 	bb := &bytes.Buffer{}
 
 	v := syncx.StringMap{}
-	v.Store("node", "1.12.0")
-	run.With(nodeChecks(&Options{
+	v.Store("npm", "7.0.0")
+	run.With(npmChecks(&Options{
 		Out:      bb,
 		Versions: v,
 	}))
@@ -30,19 +30,19 @@ func Test_nodeChecks_Success(t *testing.T) {
 	r.NoError(run.Run())
 
 	res := bb.String()
-	r.Contains(res, "The `node` executable was found")
-	r.Contains(res, "Your version of Node, 1.12.0, meets the minimum requirements.")
+	r.Contains(res, "The `npm` executable was found")
+	r.Contains(res, "Your version of NPM, 7.0.0, meets the minimum requirements.")
 }
 
-func Test_nodeChecks_Failure(t *testing.T) {
+func Test_npmChecks_Failure(t *testing.T) {
 	r := require.New(t)
 
 	run := gentest.NewRunner()
 	bb := &bytes.Buffer{}
 
 	v := syncx.StringMap{}
-	v.Store("node", "0.0.0")
-	run.With(nodeChecks(&Options{
+	v.Store("npm", "0.0.0")
+	run.With(npmChecks(&Options{
 		Out:      bb,
 		Versions: v,
 	}))
@@ -54,6 +54,6 @@ func Test_nodeChecks_Failure(t *testing.T) {
 	r.NoError(run.Run())
 
 	res := bb.String()
-	r.Contains(res, "The `node` executable could not be found")
-	r.Contains(res, "Your version of Node, 0.0.0, does not meet the minimum requirements.")
+	r.Contains(res, "The `npm` executable could not be found")
+	r.Contains(res, "Your version of NPM, 0.0.0, does not meet the minimum requirements.")
 }
