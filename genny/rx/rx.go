@@ -21,6 +21,7 @@ func New(opts *Options) (*genny.Generator, error) {
 	}
 
 	g.Merge(goCheck(opts))
+	g.Merge(buffaloChecks(opts))
 	g.Merge(nodeChecks(opts))
 	g.Merge(npmChecks(opts))
 	g.Merge(yarnChecks(opts))

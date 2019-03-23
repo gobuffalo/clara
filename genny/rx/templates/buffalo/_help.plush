@@ -1,0 +1,5 @@
+For help setting up your Buffalo environment please follow the instructions for you platform at:
+
+https://gobuffalo.io/en/docs/installation
+
+<%= partial("go/_help.plush") %>
