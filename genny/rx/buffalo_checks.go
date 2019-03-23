@@ -16,7 +16,7 @@ func buffaloChecks(opts *Options) *genny.Generator {
 		Name:    "Buffalo",
 		Bin:     "buffalo",
 		Minimum: []string{">=0.14.2"},
-		Partial: "go/_help.plush",
+		Partial: "buffalo/_help.plush",
 		Version: func() (string, error) {
 			if v, ok := opts.Versions.Load("buffalo"); ok {
 				return v, nil
