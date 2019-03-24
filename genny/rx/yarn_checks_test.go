@@ -19,7 +19,7 @@ func Test_yarnChecks_Success(t *testing.T) {
 	v := syncx.StringMap{}
 	v.Store("yarn", "1.15.0")
 	run.With(yarnChecks(&Options{
-		Out:      bb,
+		Out:      NewWriter(bb),
 		Versions: v,
 	}))
 
@@ -43,7 +43,7 @@ func Test_yarnChecks_Failure(t *testing.T) {
 	v := syncx.StringMap{}
 	v.Store("yarn", "0.0.0")
 	run.With(yarnChecks(&Options{
-		Out:      bb,
+		Out:      NewWriter(bb),
 		Versions: v,
 	}))
 

@@ -36,7 +36,7 @@ func goCheck(opts *Options) *genny.Generator {
 func goPathCheck(opts *Options) genny.RunFn {
 	return func(r *genny.Runner) error {
 		ctx := Context(opts)
-		Header(opts.Out, "Go: Checking GOPATH")
+		opts.Out.Header("Go: Checking GOPATH")
 		if envy.Mods() {
 			return opts.render("go/using_mods.plush", ctx)
 		}
@@ -52,7 +52,7 @@ func goPathCheck(opts *Options) genny.RunFn {
 
 func goPkgCheck(opts *Options) genny.RunFn {
 	return func(r *genny.Runner) error {
-		Header(opts.Out, "Go: Checking Package Management")
+		opts.Out.Header("Go: Checking Package Management")
 		ctx := Context(opts)
 		if envy.Mods() {
 			ctx.Set("pkg", "Go Modules")
@@ -74,7 +74,7 @@ func goPkgCheck(opts *Options) genny.RunFn {
 
 func goPathBinCheck(opts *Options) genny.RunFn {
 	return func(r *genny.Runner) error {
-		Header(opts.Out, "Go: Checking PATH")
+		opts.Out.Header("Go: Checking PATH")
 		path := envy.Get("PATH", "")
 
 		ctx := Context(opts)

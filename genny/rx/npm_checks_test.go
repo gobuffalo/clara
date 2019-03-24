@@ -19,7 +19,7 @@ func Test_npmChecks_Success(t *testing.T) {
 	v := syncx.StringMap{}
 	v.Store("npm", "7.0.0")
 	run.With(npmChecks(&Options{
-		Out:      bb,
+		Out:      NewWriter(bb),
 		Versions: v,
 	}))
 
@@ -43,7 +43,7 @@ func Test_npmChecks_Failure(t *testing.T) {
 	v := syncx.StringMap{}
 	v.Store("npm", "0.0.0")
 	run.With(npmChecks(&Options{
-		Out:      bb,
+		Out:      NewWriter(bb),
 		Versions: v,
 	}))
 

@@ -1,7 +1,6 @@
 package rx
 
 import (
-	"io"
 	"os"
 	"runtime"
 
@@ -14,7 +13,7 @@ import (
 type Options struct {
 	App         meta.App
 	Versions    syncx.StringMap
-	Out         io.Writer
+	Out         Writer
 	SkipBuffalo bool
 	SkipNode    bool
 }
@@ -24,8 +23,8 @@ func (opts *Options) Validate() error {
 	if opts.App.IsZero() {
 		opts.App = meta.New(".")
 	}
-	if opts.Out == nil {
-		opts.Out = os.Stdout
+	if opts.Out.Writer == nil {
+		opts.Out = NewWriter(os.Stdout)
 	}
 	if _, ok := opts.Versions.Load("go"); !ok {
 		opts.Versions.Store("go", runtime.Version())
@@ -39,5 +38,5 @@ func (opts *Options) render(s string, ctx *plush.Context) error {
 		return errors.WithStack(err)
 	}
 	ctx.Set("opts", opts)
-	return Render(opts.Out, s, ctx)
+	return opts.Out.Render(s, ctx)
 }

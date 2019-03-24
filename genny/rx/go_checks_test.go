@@ -21,7 +21,7 @@ func Test_goPathCheck_Mods(t *testing.T) {
 
 		bb := &bytes.Buffer{}
 		run.WithRun(goPathCheck(&Options{
-			Out: bb,
+			Out: NewWriter(bb),
 		}))
 		r.NoError(run.Run())
 		r.Contains(bb.String(), "You are using Go Modules")
@@ -42,7 +42,7 @@ func Test_goPathCheck_Valid(t *testing.T) {
 		app.Pwd = "/foo/src/bar"
 		run.WithRun(goPathCheck(&Options{
 			App: app,
-			Out: bb,
+			Out: NewWriter(bb),
 		}))
 		r.NoError(run.Run())
 		r.Contains(bb.String(), "operating inside of your GOPATH")
@@ -63,7 +63,7 @@ func Test_goPathCheck_Invalid(t *testing.T) {
 		app.Pwd = "asdfasdf"
 		run.WithRun(goPathCheck(&Options{
 			App: app,
-			Out: bb,
+			Out: NewWriter(bb),
 		}))
 		r.NoError(run.Run())
 		r.Contains(bb.String(), "Things to check")
@@ -78,7 +78,7 @@ func Test_pkg_Mods(t *testing.T) {
 		bb := &bytes.Buffer{}
 		run := gentest.NewRunner()
 		run.WithRun(goPkgCheck(&Options{
-			Out: bb,
+			Out: NewWriter(bb),
 		}))
 
 		r.NoError(run.Run())
@@ -101,7 +101,7 @@ func Test_pkg_Dep(t *testing.T) {
 		}
 		run.WithRun(goPkgCheck(&Options{
 			App: app,
-			Out: bb,
+			Out: NewWriter(bb),
 		}))
 
 		r.NoError(run.Run())
@@ -124,7 +124,7 @@ func Test_pkg_Dep_notFound(t *testing.T) {
 		}
 		run.WithRun(goPkgCheck(&Options{
 			App: app,
-			Out: bb,
+			Out: NewWriter(bb),
 		}))
 
 		r.NoError(run.Run())
@@ -143,7 +143,7 @@ func Test_goPathBinCheck_Valid(t *testing.T) {
 
 		bb := &bytes.Buffer{}
 		run.WithRun(goPathBinCheck(&Options{
-			Out: bb,
+			Out: NewWriter(bb),
 		}))
 		r.NoError(run.Run())
 
@@ -160,7 +160,7 @@ func Test_goPathBinCheck_Invalid(t *testing.T) {
 
 		bb := &bytes.Buffer{}
 		run.WithRun(goPathBinCheck(&Options{
-			Out: bb,
+			Out: NewWriter(bb),
 		}))
 		r.NoError(run.Run())
 

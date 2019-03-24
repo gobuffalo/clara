@@ -15,15 +15,17 @@ const (
 	WARNING = "\u26A0"
 )
 
-func Warning(help plush.HelperContext) (string, error) {
+type Helpers struct{}
+
+func (Helpers) Warning(help plush.HelperContext) (string, error) {
 	return colorize(color.YellowString, help, WARNING)
 }
 
-func Error(help plush.HelperContext) (string, error) {
+func (Helpers) Error(help plush.HelperContext) (string, error) {
 	return colorize(color.RedString, help, ERROR)
 }
 
-func Success(help plush.HelperContext) (string, error) {
+func (Helpers) Success(help plush.HelperContext) (string, error) {
 	return colorize(color.GreenString, help, SUCCESS)
 }
 

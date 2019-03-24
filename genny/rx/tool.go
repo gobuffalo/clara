@@ -40,33 +40,33 @@ func (t Tool) Generator(opts *Options) *genny.Generator {
 	ctx.Set("tool", t)
 
 	g.RunFn(func(r *genny.Runner) error {
-		Header(opts.Out, fmt.Sprintf("%s: Checking installation", t.Name))
+		opts.Out.Header(fmt.Sprintf("%s: Checking installation", t.Name))
 		bin, err := r.LookPath(t.Bin)
 		if err != nil {
 			x, err := templates.FindString("exec_not_found.plush")
 			if err != nil {
-				return RenderE(opts.Out, err)
+				return opts.Out.RenderE(err)
 			}
-			return Render(opts.Out, x, ctx)
+			return opts.Out.Render(x, ctx)
 		}
 		x, err := templates.FindString("exec_found.plush")
 		if err != nil {
-			return RenderE(opts.Out, err)
+			return opts.Out.RenderE(err)
 		}
 		ctx.Set("bin", bin)
-		return Render(opts.Out, x, ctx)
+		return opts.Out.Render(x, ctx)
 	})
 
 	g.RunFn(func(r *genny.Runner) error {
-		Header(opts.Out, fmt.Sprintf("%s: Checking minimum version requirements", t.Name))
+		opts.Out.Header(fmt.Sprintf("%s: Checking minimum version requirements", t.Name))
 		v, err := t.Version(r)
 		if err != nil {
-			return RenderE(opts.Out, errors.WithMessage(err, v))
+			return opts.Out.RenderE(errors.WithMessage(err, v))
 		}
 		ctx.Set("version", v)
 		b, err := t.AcceptVersion(v)
 		if err != nil {
-			return RenderE(opts.Out, errors.WithMessage(err, v))
+			return opts.Out.RenderE(errors.WithMessage(err, v))
 		}
 		if b {
 			return opts.render("min_version.plush", ctx)

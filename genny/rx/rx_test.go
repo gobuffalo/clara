@@ -6,7 +6,7 @@ package rx
 // 	bb := &bytes.Buffer{}
 //
 // 	g, err := New(&Options{
-// 		Out: bb,
+// 		Out: NewWriter(bb),
 // 	})
 // 	r.NoError(err)
 //

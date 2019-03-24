@@ -19,7 +19,7 @@ func Test_buffaloChecks_Success(t *testing.T) {
 	v := syncx.StringMap{}
 	v.Store("buffalo", "1.0.0")
 	run.With(buffaloChecks(&Options{
-		Out:      bb,
+		Out:      NewWriter(bb),
 		Versions: v,
 	}))
 
@@ -43,7 +43,7 @@ func Test_buffaloChecks_Failure(t *testing.T) {
 	v := syncx.StringMap{}
 	v.Store("buffalo", "0.0.0")
 	run.With(buffaloChecks(&Options{
-		Out:      bb,
+		Out:      NewWriter(bb),
 		Versions: v,
 	}))
 
