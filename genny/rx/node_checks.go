@@ -4,11 +4,13 @@ import (
 	"github.com/gobuffalo/genny"
 )
 
+var NodeMinimums = []string{">=1.11"}
+
 func nodeChecks(opts *Options) *genny.Generator {
 	t := Tool{
 		Name:    "Node",
 		Bin:     "node",
-		Minimum: []string{">=1.11"},
+		Minimum: NodeMinimums,
 		Partial: "node/_help.plush",
 		Version: func(r *genny.Runner) (string, error) {
 			if v, ok := opts.Versions.Load("node"); ok {

@@ -8,12 +8,13 @@ import (
 )
 
 var bvrx = regexp.MustCompile(`v\d+\.\d+\.\d+`)
+var BuffaloMinimums = []string{">=0.14.2"}
 
 func buffaloChecks(opts *Options) *genny.Generator {
 	t := Tool{
 		Name:    "Buffalo",
 		Bin:     "buffalo",
-		Minimum: []string{">=0.14.2"},
+		Minimum: BuffaloMinimums,
 		Partial: "buffalo/_help.plush",
 		Version: func(r *genny.Runner) (string, error) {
 			if v, ok := opts.Versions.Load("buffalo"); ok {

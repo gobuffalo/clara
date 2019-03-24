@@ -11,11 +11,13 @@ import (
 	"github.com/gobuffalo/genny"
 )
 
+var GoMinimums = []string{">=1.10.8", ">=1.11.4", ">=1.12"}
+
 func goCheck(opts *Options) *genny.Generator {
 	t := Tool{
 		Name:    "Go",
 		Bin:     "go",
-		Minimum: []string{">=1.10.8", ">=1.11.4", ">=1.12"},
+		Minimum: GoMinimums,
 		Partial: "go/_help.plush",
 		Version: func(r *genny.Runner) (string, error) {
 			v, ok := opts.Versions.Load("go")

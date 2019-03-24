@@ -4,11 +4,13 @@ import (
 	"github.com/gobuffalo/genny"
 )
 
+var NpmMinimums = []string{">=6.0.0", ">=7.0.0"}
+
 func npmChecks(opts *Options) *genny.Generator {
 	t := Tool{
 		Name:    "NPM",
 		Bin:     "npm",
-		Minimum: []string{">=6.0.0", ">=7.0.0"},
+		Minimum: NpmMinimums,
 		Partial: "node/_npm.plush",
 		Version: func(r *genny.Runner) (string, error) {
 			if v, ok := opts.Versions.Load("npm"); ok {
