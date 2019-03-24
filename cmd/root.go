@@ -8,13 +8,15 @@ import (
 
 	"github.com/gobuffalo/clara/genny/rx"
 	"github.com/gobuffalo/genny"
+	"github.com/gobuffalo/logger"
 	"github.com/gobuffalo/meta"
 	"github.com/spf13/cobra"
 )
 
 var options = struct {
 	*rx.Options
-	dryRun bool
+	dryRun  bool
+	verbose bool
 }{
 	Options: &rx.Options{},
 }
@@ -32,6 +34,10 @@ var rootCmd = &cobra.Command{
 		run := genny.WetRunner(ctx)
 		if options.dryRun {
 			run = genny.DryRunner(ctx)
+		}
+
+		if options.verbose {
+			run.Logger = logger.New(logger.DebugLevel)
 		}
 
 		opts := options.Options
@@ -54,6 +60,7 @@ func Execute() {
 
 func init() {
 	rootCmd.Flags().BoolVarP(&options.dryRun, "dry-run", "d", false, "dry run")
+	rootCmd.Flags().BoolVarP(&options.verbose, "verbose", "v", false, "verbose output")
 	rootCmd.Flags().BoolVar(&options.SkipBuffalo, "skip-buffalo", false, "skip buffalo related checks")
 	rootCmd.Flags().BoolVar(&options.SkipNode, "skip-node", false, "skip node related checks")
 }

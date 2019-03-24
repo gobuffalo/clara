@@ -9,6 +9,7 @@ require (
 	github.com/gobuffalo/envy v1.6.15
 	github.com/gobuffalo/genny v0.0.0-20190315124720-e16e52a93c79
 	github.com/gobuffalo/github_flavored_markdown v1.0.7 // indirect
+	github.com/gobuffalo/logger v0.0.0-20190315122211-86e12af44bc2
 	github.com/gobuffalo/meta v0.0.0-20190320152240-a5320142224a
 	github.com/gobuffalo/packr/v2 v2.0.8
 	github.com/gobuffalo/plush v3.7.33+incompatible

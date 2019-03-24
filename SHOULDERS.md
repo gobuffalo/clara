@@ -17,6 +17,8 @@ Thank you to the following **GIANTS**:
 
 * [github.com/gobuffalo/github_flavored_markdown](https://godoc.org/github.com/gobuffalo/github_flavored_markdown)
 
+* [github.com/gobuffalo/logger](https://godoc.org/github.com/gobuffalo/logger)
+
 * [github.com/gobuffalo/meta](https://godoc.org/github.com/gobuffalo/meta)
 
 * [github.com/gobuffalo/packr/v2](https://godoc.org/github.com/gobuffalo/packr/v2)
