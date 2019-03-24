@@ -4,11 +4,20 @@ import (
 	"context"
 	"fmt"
 	"os"
+	"time"
 
 	"github.com/gobuffalo/clara/genny/rx"
 	"github.com/gobuffalo/genny"
+	"github.com/gobuffalo/meta"
 	"github.com/spf13/cobra"
 )
+
+var options = struct {
+	*rx.Options
+	dryRun bool
+}{
+	Options: &rx.Options{},
+}
 
 // rootCmd represents the base command when called without any subcommands
 var rootCmd = &cobra.Command{
@@ -17,8 +26,17 @@ var rootCmd = &cobra.Command{
 	// Uncomment the following line if your bare application
 	// has an action associated with it:
 	RunE: func(cmd *cobra.Command, args []string) error {
-		run := genny.WetRunner(context.Background())
-		if err := run.WithNew(rx.New(&rx.Options{})); err != nil {
+		ctx, cancel := context.WithTimeout(context.Background(), 5*time.Second)
+		defer cancel()
+
+		run := genny.WetRunner(ctx)
+		if options.dryRun {
+			run = genny.DryRunner(ctx)
+		}
+
+		opts := options.Options
+		opts.App = meta.New(".")
+		if err := run.WithNew(rx.New(opts)); err != nil {
 			return err
 		}
 		return run.Run()
@@ -35,4 +53,7 @@ func Execute() {
 }
 
 func init() {
+	rootCmd.Flags().BoolVarP(&options.dryRun, "dry-run", "d", false, "dry run")
+	rootCmd.Flags().BoolVar(&options.SkipBuffalo, "skip-buffalo", false, "skip buffalo related checks")
+	rootCmd.Flags().BoolVar(&options.SkipNode, "skip-node", false, "skip node related checks")
 }

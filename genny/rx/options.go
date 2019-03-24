@@ -13,9 +13,11 @@ import (
 )
 
 type Options struct {
-	App      meta.App
-	Versions syncx.StringMap
-	Out      io.Writer
+	App         meta.App
+	Versions    syncx.StringMap
+	Out         io.Writer
+	SkipBuffalo bool
+	SkipNode    bool
 }
 
 // Validate that options are usuable
