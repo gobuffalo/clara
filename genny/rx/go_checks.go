@@ -6,7 +6,6 @@ import (
 	"runtime"
 	"strings"
 
-	"github.com/gobuffalo/clara/genny/helpers"
 	"github.com/gobuffalo/envy"
 	"github.com/gobuffalo/genny"
 )
@@ -36,8 +35,8 @@ func goCheck(opts *Options) *genny.Generator {
 
 func goPathCheck(opts *Options) genny.RunFn {
 	return func(r *genny.Runner) error {
-		ctx := helpers.Context(opts)
-		helpers.Header(opts.Out, "Go: Checking GOPATH")
+		ctx := Context(opts)
+		Header(opts.Out, "Go: Checking GOPATH")
 		if envy.Mods() {
 			return opts.render("go/using_mods.plush", ctx)
 		}
@@ -53,8 +52,8 @@ func goPathCheck(opts *Options) genny.RunFn {
 
 func goPkgCheck(opts *Options) genny.RunFn {
 	return func(r *genny.Runner) error {
-		helpers.Header(opts.Out, "Go: Checking Package Management")
-		ctx := helpers.Context(opts)
+		Header(opts.Out, "Go: Checking Package Management")
+		ctx := Context(opts)
 		if envy.Mods() {
 			ctx.Set("pkg", "Go Modules")
 			ctx.Set("exec", envy.GoBin())
@@ -75,10 +74,10 @@ func goPkgCheck(opts *Options) genny.RunFn {
 
 func goPathBinCheck(opts *Options) genny.RunFn {
 	return func(r *genny.Runner) error {
-		helpers.Header(opts.Out, "Go: Checking PATH")
+		Header(opts.Out, "Go: Checking PATH")
 		path := envy.Get("PATH", "")
 
-		ctx := helpers.Context(opts)
+		ctx := Context(opts)
 		if strings.Contains(path, filepath.Join(envy.GoPath(), "bin")) {
 			return opts.render("valid_path.plush", ctx)
 		}

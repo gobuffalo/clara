@@ -5,7 +5,6 @@ import (
 	"os"
 	"runtime"
 
-	"github.com/gobuffalo/clara/genny/helpers"
 	"github.com/gobuffalo/meta"
 	"github.com/gobuffalo/plush"
 	"github.com/gobuffalo/syncx"
@@ -40,5 +39,5 @@ func (opts *Options) render(s string, ctx *plush.Context) error {
 		return errors.WithStack(err)
 	}
 	ctx.Set("opts", opts)
-	return helpers.Render(opts.Out, s, ctx)
+	return Render(opts.Out, s, ctx)
 }

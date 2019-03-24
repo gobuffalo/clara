@@ -4,7 +4,6 @@ import (
 	"fmt"
 
 	"github.com/Masterminds/semver"
-	"github.com/gobuffalo/clara/genny/helpers"
 	"github.com/gobuffalo/genny"
 	"github.com/pkg/errors"
 )
@@ -37,37 +36,37 @@ func (t Tool) AcceptVersion(v string) (bool, error) {
 func (t Tool) Generator(opts *Options) *genny.Generator {
 	g := genny.New()
 
-	ctx := helpers.Context(opts)
+	ctx := Context(opts)
 	ctx.Set("tool", t)
 
 	g.RunFn(func(r *genny.Runner) error {
-		helpers.Header(opts.Out, fmt.Sprintf("%s: Checking installation", t.Name))
+		Header(opts.Out, fmt.Sprintf("%s: Checking installation", t.Name))
 		bin, err := r.LookPath(t.Bin)
 		if err != nil {
 			x, err := templates.FindString("exec_not_found.plush")
 			if err != nil {
-				return helpers.RenderE(opts.Out, err)
+				return RenderE(opts.Out, err)
 			}
-			return helpers.Render(opts.Out, x, ctx)
+			return Render(opts.Out, x, ctx)
 		}
 		x, err := templates.FindString("exec_found.plush")
 		if err != nil {
-			return helpers.RenderE(opts.Out, err)
+			return RenderE(opts.Out, err)
 		}
 		ctx.Set("bin", bin)
-		return helpers.Render(opts.Out, x, ctx)
+		return Render(opts.Out, x, ctx)
 	})
 
 	g.RunFn(func(r *genny.Runner) error {
-		helpers.Header(opts.Out, fmt.Sprintf("%s: Checking minimum version requirements", t.Name))
+		Header(opts.Out, fmt.Sprintf("%s: Checking minimum version requirements", t.Name))
 		v, err := t.Version(r)
 		if err != nil {
-			return helpers.RenderE(opts.Out, errors.WithMessage(err, v))
+			return RenderE(opts.Out, errors.WithMessage(err, v))
 		}
 		ctx.Set("version", v)
 		b, err := t.AcceptVersion(v)
 		if err != nil {
-			return helpers.RenderE(opts.Out, errors.WithMessage(err, v))
+			return RenderE(opts.Out, errors.WithMessage(err, v))
 		}
 		if b {
 			return opts.render("min_version.plush", ctx)

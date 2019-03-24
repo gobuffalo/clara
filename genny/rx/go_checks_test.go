@@ -5,7 +5,6 @@ import (
 	"path/filepath"
 	"testing"
 
-	"github.com/gobuffalo/clara/genny/helpers"
 	"github.com/gobuffalo/envy"
 	"github.com/gobuffalo/genny/gentest"
 	"github.com/gobuffalo/meta"
@@ -148,7 +147,7 @@ func Test_goPathBinCheck_Valid(t *testing.T) {
 		}))
 		r.NoError(run.Run())
 
-		r.Contains(bb.String(), helpers.SUCCESS)
+		r.Contains(bb.String(), SUCCESS)
 	})
 }
 
@@ -165,6 +164,6 @@ func Test_goPathBinCheck_Invalid(t *testing.T) {
 		}))
 		r.NoError(run.Run())
 
-		r.Contains(bb.String(), helpers.ERROR)
+		r.Contains(bb.String(), ERROR)
 	})
 }
