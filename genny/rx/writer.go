@@ -29,7 +29,9 @@ func (w Writer) Tabs(lines [][]string) error {
 	tw := tabwriter.NewWriter(w, 0, 0, 1, ' ', 0)
 	defer tw.Flush()
 	for _, line := range lines {
-		_, err := tw.Write([]byte(strings.Join(line, "\t")))
+		flat := strings.Join(line, "\t") + "\n"
+		fmt.Printf("### flat -> %+v\n", flat)
+		_, err := tw.Write([]byte(flat))
 		if err != nil {
 			return err
 		}
