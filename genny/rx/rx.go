@@ -21,13 +21,16 @@ func New(opts *Options) (*genny.Generator, error) {
 	}
 
 	g.Merge(goCheck(opts))
-	if !opts.SkipBuffalo {
-		g.Merge(buffaloChecks(opts))
-		if !opts.SkipNode {
-			g.Merge(nodeChecks(opts))
-			g.Merge(npmChecks(opts))
-			g.Merge(yarnChecks(opts))
-		}
+	if opts.SkipBuffalo {
+		return g, nil
 	}
+	if !opts.SkipNode {
+		g.Merge(nodeChecks(opts))
+		g.Merge(npmChecks(opts))
+		g.Merge(yarnChecks(opts))
+	}
+
+	g.Merge(buffaloChecks(opts))
+
 	return g, nil
 }
