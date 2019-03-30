@@ -55,5 +55,4 @@ func Test_nodeChecks_Failure(t *testing.T) {
 
 	res := bb.String()
 	r.Contains(res, "The `node` executable could not be found")
-	r.Contains(res, "Your version of Node, 0.0.0, does not meet the minimum requirements.")
 }

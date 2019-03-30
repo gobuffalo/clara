@@ -16,6 +16,7 @@ type Options struct {
 	Out         Writer
 	SkipBuffalo bool
 	SkipNode    bool
+	SkipDB      bool
 }
 
 // Validate that options are usuable

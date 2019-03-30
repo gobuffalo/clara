@@ -55,5 +55,4 @@ func Test_yarnChecks_Failure(t *testing.T) {
 
 	res := bb.String()
 	r.Contains(res, "The `yarnpkg` executable could not be found")
-	r.Contains(res, "Your version of Yarn, 0.0.0, does not meet the minimum requirements.")
 }

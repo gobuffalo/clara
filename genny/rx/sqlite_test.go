@@ -2,6 +2,8 @@ package rx
 
 import (
 	"bytes"
+	"os/exec"
+	"strings"
 	"testing"
 
 	"github.com/gobuffalo/genny/gentest"
@@ -10,15 +12,22 @@ import (
 	"github.com/stretchr/testify/require"
 )
 
-func Test_buffaloChecks_Success(t *testing.T) {
+func Test_sqliteChecks_Success(t *testing.T) {
 	r := require.New(t)
 
 	run := gentest.NewRunner()
 	bb := &bytes.Buffer{}
 
 	v := syncx.StringMap{}
-	v.Store("buffalo", "1.0.0")
-	run.With(buffaloChecks(&Options{
+	run.ExecFn = func(c *exec.Cmd) error {
+		a := strings.Join(c.Args, " ")
+		if a != "sqlite3 --version" {
+			return nil
+		}
+		c.Stdout.Write([]byte("3.24.0 2018-06-04 14:10:15 95fbac39baaab1c3a84fdfc82ccb7f42398b2e92f18a2a57bce1d4a713cbaapl"))
+		return nil
+	}
+	run.With(sqliteChecks(&Options{
 		Out:      NewWriter(bb),
 		Versions: v,
 	}))
@@ -30,19 +39,19 @@ func Test_buffaloChecks_Success(t *testing.T) {
 	r.NoError(run.Run())
 
 	res := bb.String()
-	r.Contains(res, "The `buffalo` executable was found")
-	r.Contains(res, "Your version of Buffalo, 1.0.0, meets the minimum requirements.")
+	r.Contains(res, "The `sqlite3` executable was found")
+	r.Contains(res, "Your version of SQLite3, 3.24.0, meets the minimum requirements.")
 }
 
-func Test_buffaloChecks_Failure(t *testing.T) {
+func Test_sqliteChecks_Failure(t *testing.T) {
 	r := require.New(t)
 
 	run := gentest.NewRunner()
 	bb := &bytes.Buffer{}
 
 	v := syncx.StringMap{}
-	v.Store("buffalo", "0.0.0")
-	run.With(buffaloChecks(&Options{
+	v.Store("sqlite", "0.0.0")
+	run.With(sqliteChecks(&Options{
 		Out:      NewWriter(bb),
 		Versions: v,
 	}))
@@ -54,5 +63,5 @@ func Test_buffaloChecks_Failure(t *testing.T) {
 	r.NoError(run.Run())
 
 	res := bb.String()
-	r.Contains(res, "The `buffalo` executable could not be found")
+	r.Contains(res, "The `sqlite3` executable could not be found")
 }

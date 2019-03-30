@@ -30,6 +30,13 @@ func New(opts *Options) (*genny.Generator, error) {
 		g.Merge(yarnChecks(opts))
 	}
 
+	if !opts.SkipDB {
+		g.Merge(postgresChecks(opts))
+		g.Merge(mysqlChecks(opts))
+		g.Merge(sqliteChecks(opts))
+		g.Merge(cockroachChecks(opts))
+	}
+
 	g.Merge(buffaloChecks(opts))
 
 	return g, nil

@@ -63,4 +63,5 @@ func init() {
 	rootCmd.Flags().BoolVarP(&options.verbose, "verbose", "v", false, "verbose output")
 	rootCmd.Flags().BoolVar(&options.SkipBuffalo, "skip-buffalo", false, "skip buffalo related checks")
 	rootCmd.Flags().BoolVar(&options.SkipNode, "skip-node", false, "skip node related checks")
+	rootCmd.Flags().BoolVar(&options.SkipDB, "skip-db", false, "skip DB related checks")
 }

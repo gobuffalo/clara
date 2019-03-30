@@ -2,6 +2,8 @@ package rx
 
 import (
 	"bytes"
+	"os/exec"
+	"strings"
 	"testing"
 
 	"github.com/gobuffalo/genny/gentest"
@@ -10,15 +12,22 @@ import (
 	"github.com/stretchr/testify/require"
 )
 
-func Test_buffaloChecks_Success(t *testing.T) {
+func Test_postgresChecks_Success(t *testing.T) {
 	r := require.New(t)
 
 	run := gentest.NewRunner()
 	bb := &bytes.Buffer{}
 
 	v := syncx.StringMap{}
-	v.Store("buffalo", "1.0.0")
-	run.With(buffaloChecks(&Options{
+	run.ExecFn = func(c *exec.Cmd) error {
+		a := strings.Join(c.Args, " ")
+		if a != "postgres --version" {
+			return nil
+		}
+		c.Stdout.Write([]byte("postgres (PostgreSQL) 10.5"))
+		return nil
+	}
+	run.With(postgresChecks(&Options{
 		Out:      NewWriter(bb),
 		Versions: v,
 	}))
@@ -30,19 +39,19 @@ func Test_buffaloChecks_Success(t *testing.T) {
 	r.NoError(run.Run())
 
 	res := bb.String()
-	r.Contains(res, "The `buffalo` executable was found")
-	r.Contains(res, "Your version of Buffalo, 1.0.0, meets the minimum requirements.")
+	r.Contains(res, "The `postgres` executable was found")
+	r.Contains(res, "Your version of PostgreSQL, 10.5, meets the minimum requirements.")
 }
 
-func Test_buffaloChecks_Failure(t *testing.T) {
+func Test_postgresChecks_Failure(t *testing.T) {
 	r := require.New(t)
 
 	run := gentest.NewRunner()
 	bb := &bytes.Buffer{}
 
 	v := syncx.StringMap{}
-	v.Store("buffalo", "0.0.0")
-	run.With(buffaloChecks(&Options{
+	v.Store("postgres", "0.0.0")
+	run.With(postgresChecks(&Options{
 		Out:      NewWriter(bb),
 		Versions: v,
 	}))
@@ -54,5 +63,5 @@ func Test_buffaloChecks_Failure(t *testing.T) {
 	r.NoError(run.Run())
 
 	res := bb.String()
-	r.Contains(res, "The `buffalo` executable could not be found")
+	r.Contains(res, "The `postgres` executable could not be found")
 }

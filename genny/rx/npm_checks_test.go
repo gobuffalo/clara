@@ -55,5 +55,4 @@ func Test_npmChecks_Failure(t *testing.T) {
 
 	res := bb.String()
 	r.Contains(res, "The `npm` executable could not be found")
-	r.Contains(res, "Your version of NPM, 0.0.0, does not meet the minimum requirements.")
 }

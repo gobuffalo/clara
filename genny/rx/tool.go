@@ -58,6 +58,10 @@ func (t Tool) Generator(opts *Options) *genny.Generator {
 	})
 
 	g.RunFn(func(r *genny.Runner) error {
+		_, err := r.LookPath(t.Bin)
+		if err != nil {
+			return nil
+		}
 		opts.Out.Header(fmt.Sprintf("%s: Checking minimum version requirements", t.Name))
 		v, err := t.Version(r)
 		if err != nil {

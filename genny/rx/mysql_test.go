@@ -2,6 +2,8 @@ package rx
 
 import (
 	"bytes"
+	"os/exec"
+	"strings"
 	"testing"
 
 	"github.com/gobuffalo/genny/gentest"
@@ -10,15 +12,22 @@ import (
 	"github.com/stretchr/testify/require"
 )
 
-func Test_buffaloChecks_Success(t *testing.T) {
+func Test_mysqlChecks_Success(t *testing.T) {
 	r := require.New(t)
 
 	run := gentest.NewRunner()
 	bb := &bytes.Buffer{}
 
 	v := syncx.StringMap{}
-	v.Store("buffalo", "1.0.0")
-	run.With(buffaloChecks(&Options{
+	run.ExecFn = func(c *exec.Cmd) error {
+		a := strings.Join(c.Args, " ")
+		if a != "mysql --version" {
+			return nil
+		}
+		c.Stdout.Write([]byte("mysql  Ver 8.0.12 for osx10.13 on x86_64 (Homebrew)"))
+		return nil
+	}
+	run.With(mysqlChecks(&Options{
 		Out:      NewWriter(bb),
 		Versions: v,
 	}))
@@ -30,19 +39,19 @@ func Test_buffaloChecks_Success(t *testing.T) {
 	r.NoError(run.Run())
 
 	res := bb.String()
-	r.Contains(res, "The `buffalo` executable was found")
-	r.Contains(res, "Your version of Buffalo, 1.0.0, meets the minimum requirements.")
+	r.Contains(res, "The `mysql` executable was found")
+	r.Contains(res, "Your version of MySQL, 8.0.12, meets the minimum requirements.")
 }
 
-func Test_buffaloChecks_Failure(t *testing.T) {
+func Test_mysqlChecks_Failure(t *testing.T) {
 	r := require.New(t)
 
 	run := gentest.NewRunner()
 	bb := &bytes.Buffer{}
 
 	v := syncx.StringMap{}
-	v.Store("buffalo", "0.0.0")
-	run.With(buffaloChecks(&Options{
+	v.Store("mysql", "0.0.0")
+	run.With(mysqlChecks(&Options{
 		Out:      NewWriter(bb),
 		Versions: v,
 	}))
@@ -54,5 +63,5 @@ func Test_buffaloChecks_Failure(t *testing.T) {
 	r.NoError(run.Run())
 
 	res := bb.String()
-	r.Contains(res, "The `buffalo` executable could not be found")
+	r.Contains(res, "The `mysql` executable could not be found")
 }
