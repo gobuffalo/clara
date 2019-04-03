@@ -7,7 +7,6 @@ import (
 	"github.com/gobuffalo/meta"
 	"github.com/gobuffalo/plush"
 	"github.com/gobuffalo/syncx"
-	"github.com/pkg/errors"
 )
 
 type Options struct {
@@ -36,7 +35,7 @@ func (opts *Options) Validate() error {
 func (opts *Options) render(s string, ctx *plush.Context) error {
 	s, err := templates.FindString(s)
 	if err != nil {
-		return errors.WithStack(err)
+		return err
 	}
 	ctx.Set("opts", opts)
 	return opts.Out.Render(s, ctx)

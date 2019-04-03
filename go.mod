@@ -6,7 +6,7 @@ require (
 	github.com/fatih/color v1.7.0
 	github.com/fatih/structs v1.1.0 // indirect
 	github.com/gobuffalo/envy v1.6.15
-	github.com/gobuffalo/genny v0.0.0-20190329153409-7be1b23270eb
+	github.com/gobuffalo/genny v0.0.0-20190403191548-3ca520ef0d9e
 	github.com/gobuffalo/github_flavored_markdown v1.0.7 // indirect
 	github.com/gobuffalo/logger v0.0.0-20190315122211-86e12af44bc2
 	github.com/gobuffalo/meta v0.0.0-20190329152330-e161e8a93e3b
