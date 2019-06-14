@@ -5,8 +5,6 @@ github.com/gobuffalo/clara does not try to reinvent the wheel! Instead, it uses 
 Thank you to the following **GIANTS**:
 
 
-* [github.com/BurntSushi/toml](https://godoc.org/github.com/BurntSushi/toml)
-
 * [github.com/Masterminds/semver](https://godoc.org/github.com/Masterminds/semver)
 
 * [github.com/fatih/color](https://godoc.org/github.com/fatih/color)
@@ -17,7 +15,7 @@ Thank you to the following **GIANTS**:
 
 * [github.com/gobuffalo/genny](https://godoc.org/github.com/gobuffalo/genny)
 
-* [github.com/gobuffalo/github_flavored_markdown](https://godoc.org/github.com/gobuffalo/github_flavored_markdown)
+* [github.com/gobuffalo/helpers](https://godoc.org/github.com/gobuffalo/helpers)
 
 * [github.com/gobuffalo/logger](https://godoc.org/github.com/gobuffalo/logger)
 
@@ -27,21 +25,13 @@ Thank you to the following **GIANTS**:
 
 * [github.com/gobuffalo/plush](https://godoc.org/github.com/gobuffalo/plush)
 
-* [github.com/gobuffalo/syncx](https://godoc.org/github.com/gobuffalo/syncx)
-
-* [github.com/gobuffalo/tags](https://godoc.org/github.com/gobuffalo/tags)
-
 * [github.com/gobuffalo/uuid](https://godoc.org/github.com/gobuffalo/uuid)
 
 * [github.com/gobuffalo/validate](https://godoc.org/github.com/gobuffalo/validate)
 
 * [github.com/gofrs/uuid](https://godoc.org/github.com/gofrs/uuid)
 
-* [github.com/markbates/inflect](https://godoc.org/github.com/markbates/inflect)
-
 * [github.com/mattn/go-colorable](https://godoc.org/github.com/mattn/go-colorable)
-
-* [github.com/mattn/go-isatty](https://godoc.org/github.com/mattn/go-isatty)
 
 * [github.com/onsi/ginkgo](https://godoc.org/github.com/onsi/ginkgo)
 
