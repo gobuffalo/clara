@@ -7,7 +7,6 @@ import (
 	"testing"
 
 	"github.com/gobuffalo/genny/gentest"
-	"github.com/gobuffalo/syncx"
 	"github.com/pkg/errors"
 	"github.com/stretchr/testify/require"
 )
@@ -18,7 +17,7 @@ func Test_sqliteChecks_Success(t *testing.T) {
 	run := gentest.NewRunner()
 	bb := &bytes.Buffer{}
 
-	v := syncx.StringMap{}
+	v := StringMap{}
 	run.ExecFn = func(c *exec.Cmd) error {
 		a := strings.Join(c.Args, " ")
 		if a != "sqlite3 --version" {
@@ -49,7 +48,7 @@ func Test_sqliteChecks_Failure(t *testing.T) {
 	run := gentest.NewRunner()
 	bb := &bytes.Buffer{}
 
-	v := syncx.StringMap{}
+	v := StringMap{}
 	v.Store("sqlite", "0.0.0")
 	run.With(sqliteChecks(&Options{
 		Out:      NewWriter(bb),

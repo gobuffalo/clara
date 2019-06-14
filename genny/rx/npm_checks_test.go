@@ -5,7 +5,6 @@ import (
 	"testing"
 
 	"github.com/gobuffalo/genny/gentest"
-	"github.com/gobuffalo/syncx"
 	"github.com/pkg/errors"
 	"github.com/stretchr/testify/require"
 )
@@ -16,7 +15,7 @@ func Test_npmChecks_Success(t *testing.T) {
 	run := gentest.NewRunner()
 	bb := &bytes.Buffer{}
 
-	v := syncx.StringMap{}
+	v := StringMap{}
 	v.Store("npm", "7.0.0")
 	run.With(npmChecks(&Options{
 		Out:      NewWriter(bb),
@@ -40,7 +39,7 @@ func Test_npmChecks_Failure(t *testing.T) {
 	run := gentest.NewRunner()
 	bb := &bytes.Buffer{}
 
-	v := syncx.StringMap{}
+	v := StringMap{}
 	v.Store("npm", "0.0.0")
 	run.With(npmChecks(&Options{
 		Out:      NewWriter(bb),

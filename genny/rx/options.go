@@ -6,12 +6,11 @@ import (
 
 	"github.com/gobuffalo/meta"
 	"github.com/gobuffalo/plush"
-	"github.com/gobuffalo/syncx"
 )
 
 type Options struct {
 	App         meta.App
-	Versions    syncx.StringMap
+	Versions    StringMap
 	Out         Writer
 	SkipBuffalo bool
 	SkipNode    bool
