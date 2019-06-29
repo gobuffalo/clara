@@ -1,7 +1,6 @@
 package rx
 
 import (
-	"errors"
 	"fmt"
 	"strings"
 
@@ -31,7 +30,7 @@ func (Helpers) Success(help plush.HelperContext) (string, error) {
 
 func colorize(fn func(s string, i ...interface{}) string, help plush.HelperContext, mark string) (string, error) {
 	if !help.HasBlock() {
-		return "", errors.New("no block given")
+		return "", fmt.Errorf("no block given")
 	}
 	x, err := help.Block()
 	if err != nil {

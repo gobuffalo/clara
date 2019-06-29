@@ -5,7 +5,6 @@ import (
 
 	"github.com/Masterminds/semver"
 	"github.com/gobuffalo/genny"
-	"github.com/pkg/errors"
 )
 
 type Tool struct {
@@ -19,12 +18,12 @@ type Tool struct {
 func (t Tool) AcceptVersion(v string) (bool, error) {
 	sv, err := semver.NewVersion(v)
 	if err != nil {
-		return false, errors.WithMessage(err, v)
+		return false, err
 	}
 	for _, x := range t.Minimum {
 		c, err := semver.NewConstraint(x)
 		if err != nil {
-			return false, errors.WithMessage(err, x)
+			return false, err
 		}
 		if c.Check(sv) {
 			return true, nil
@@ -65,12 +64,12 @@ func (t Tool) Generator(opts *Options) *genny.Generator {
 		opts.Out.Header(fmt.Sprintf("%s: Checking minimum version requirements", t.Name))
 		v, err := t.Version(r)
 		if err != nil {
-			return opts.Out.RenderE(errors.WithMessage(err, v))
+			return opts.Out.RenderE(err)
 		}
 		ctx.Set("version", v)
 		b, err := t.AcceptVersion(v)
 		if err != nil {
-			return opts.Out.RenderE(errors.WithMessage(err, v))
+			return opts.Out.RenderE(err)
 		}
 		if b {
 			return opts.render("min_version.plush", ctx)

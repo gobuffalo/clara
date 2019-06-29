@@ -2,13 +2,13 @@ package rx
 
 import (
 	"bytes"
+	"fmt"
 	"path/filepath"
 	"testing"
 
 	"github.com/gobuffalo/envy"
 	"github.com/gobuffalo/genny/gentest"
 	"github.com/gobuffalo/meta"
-	"github.com/pkg/errors"
 	"github.com/stretchr/testify/require"
 )
 
@@ -120,7 +120,7 @@ func Test_pkg_Dep_notFound(t *testing.T) {
 		app := meta.New(".")
 		app.WithDep = true
 		run.LookPathFn = func(s string) (string, error) {
-			return s, errors.New("oops")
+			return s, fmt.Errorf("oops")
 		}
 		run.WithRun(goPkgCheck(&Options{
 			App: app,

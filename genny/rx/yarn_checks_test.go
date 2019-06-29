@@ -2,10 +2,10 @@ package rx
 
 import (
 	"bytes"
+	"fmt"
 	"testing"
 
 	"github.com/gobuffalo/genny/gentest"
-	"github.com/pkg/errors"
 	"github.com/stretchr/testify/require"
 )
 
@@ -47,7 +47,7 @@ func Test_yarnChecks_Failure(t *testing.T) {
 	}))
 
 	run.LookPathFn = func(s string) (string, error) {
-		return s, errors.New("oops")
+		return s, fmt.Errorf("oops")
 	}
 
 	r.NoError(run.Run())
