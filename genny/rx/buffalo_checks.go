@@ -8,7 +8,7 @@ import (
 )
 
 var bvrx = regexp.MustCompile(`v\d+\.\d+\.\d+`)
-var BuffaloMinimums = []string{">=0.14.2"}
+var BuffaloMinimums = []string{">=0.14.10"}
 
 func buffaloChecks(opts *Options) *genny.Generator {
 	t := Tool{
