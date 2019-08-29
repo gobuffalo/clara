@@ -30,7 +30,7 @@ func Test_buffaloChecks_Success(t *testing.T) {
 
 	res := bb.String()
 	r.Contains(res, "The `buffalo` executable was found")
-	r.Contains(res, "Your version of Buffalo, 1.0.0, meets the minimum requirements.")
+	r.Contains(res, "Your version of Buffalo (CLI), 1.0.0, meets the minimum requirements.")
 }
 
 func Test_buffaloChecks_Failure(t *testing.T) {

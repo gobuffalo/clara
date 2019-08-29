@@ -12,7 +12,7 @@ var BuffaloMinimums = []string{">=0.14.10"}
 
 func buffaloChecks(opts *Options) *genny.Generator {
 	t := Tool{
-		Name:    "Buffalo",
+		Name:    "Buffalo (CLI)",
 		Bin:     "buffalo",
 		Minimum: BuffaloMinimums,
 		Partial: "buffalo/_help.plush",
