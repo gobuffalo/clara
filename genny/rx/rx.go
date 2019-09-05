@@ -3,14 +3,13 @@ package rx
 import (
 	"github.com/gobuffalo/genny"
 	packr "github.com/gobuffalo/packr/v2"
-	"github.com/gobuffalo/plush"
 )
 
 var templates = packr.New("github.com/gobuffalo/clara/genny/rx/templates", "../rx/templates")
 
-func init() {
-	plush.Helpers.Add("partialFeeder", templates.FindString)
-}
+// func init() {
+// 	plush.Helpers.Add("partialFeeder", templates.FindString)
+// }
 
 func New(opts *Options) (*genny.Generator, error) {
 	g := genny.New()

@@ -10,7 +10,7 @@ import (
 	"github.com/gobuffalo/genny"
 )
 
-var GoMinimums = []string{">=1.10.8", ">=1.11.4", ">=1.12"}
+var GoMinimums = []string{">=1.12", ">=1.13"}
 
 func goCheck(opts *Options) *genny.Generator {
 	t := Tool{

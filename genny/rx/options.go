@@ -37,5 +37,6 @@ func (opts *Options) render(s string, ctx *plush.Context) error {
 		return err
 	}
 	ctx.Set("opts", opts)
+	ctx.Set("partialFeeder", templates.FindString)
 	return opts.Out.Render(s, ctx)
 }

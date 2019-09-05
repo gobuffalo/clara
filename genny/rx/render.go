@@ -16,6 +16,7 @@ func (w Writer) RenderE(err error) error {
 }
 
 func (w Writer) Render(s string, ctx *plush.Context) error {
+	ctx.Set("partialFeeder", templates.FindString)
 	s, err := plush.Render(s, ctx)
 	if err != nil {
 		return err
