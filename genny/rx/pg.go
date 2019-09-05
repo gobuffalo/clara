@@ -26,7 +26,7 @@ func postgresChecks(opts *Options) *genny.Generator {
 			}
 			v = pgrx.FindString(v)
 			v = strings.TrimSpace(v)
-			return v, nil
+			return v + ".0", nil
 		},
 	}
 

@@ -39,7 +39,7 @@ func Test_postgresChecks_Success(t *testing.T) {
 
 	res := bb.String()
 	r.Contains(res, "The `postgres` executable was found")
-	r.Contains(res, "Your version of PostgreSQL, 10.5, meets the minimum requirements.")
+	r.Contains(res, "Your version of PostgreSQL, 10.5.0, meets the minimum requirements.")
 }
 
 func Test_postgresChecks_Failure(t *testing.T) {
