@@ -25,12 +25,6 @@ Thank you to the following **GIANTS**:
 
 * [github.com/mattn/go-isatty](https://godoc.org/github.com/mattn/go-isatty)
 
-* [github.com/rogpeppe/go-internal](https://godoc.org/github.com/rogpeppe/go-internal)
-
 * [github.com/spf13/cobra](https://godoc.org/github.com/spf13/cobra)
 
 * [github.com/stretchr/testify](https://godoc.org/github.com/stretchr/testify)
-
-* [golang.org/x/crypto](https://godoc.org/golang.org/x/crypto)
-
-* [golang.org/x/sys](https://godoc.org/golang.org/x/sys)

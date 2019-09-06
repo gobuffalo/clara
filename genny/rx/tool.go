@@ -2,6 +2,7 @@ package rx
 
 import (
 	"fmt"
+	"strings"
 
 	"github.com/Masterminds/semver"
 	"github.com/gobuffalo/genny"
@@ -16,6 +17,9 @@ type Tool struct {
 }
 
 func (t Tool) AcceptVersion(v string) (bool, error) {
+	if !strings.HasPrefix(v, "v") {
+		v = "v" + v
+	}
 	sv, err := semver.NewVersion(v)
 	if err != nil {
 		return false, err

@@ -17,7 +17,7 @@ func Test_Tool_AcceptVersion(t *testing.T) {
 		{mins: []string{">= 1.10.5", ">= 1.11.5", ">= 1.12"}, version: "1.12.1", Pass: true},
 		{mins: []string{">= v1.10.5", ">= v1.11.5", ">= v1.12"}, version: "1.12.1", Pass: true},
 		{mins: []string{"1.10.5", "1.11.5", ">= 1.12"}, version: "1.12.1", Pass: true},
-		{mins: []string{"1.10.5", "1.11.5", "1.12"}, version: "1.12.1", Pass: false},
+		{mins: []string{"1.10.5", "1.11.5", "1.12"}, version: "1.13.1", Pass: false},
 		{mins: []string{"1.10.5", "1.11.5", "1.12"}, version: "1.2.1", Pass: false},
 	}
 
