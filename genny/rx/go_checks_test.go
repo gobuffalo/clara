@@ -2,73 +2,13 @@ package rx
 
 import (
 	"bytes"
-	"fmt"
 	"path/filepath"
 	"testing"
 
 	"github.com/gobuffalo/envy"
 	"github.com/gobuffalo/genny/gentest"
-	"github.com/gobuffalo/meta"
 	"github.com/stretchr/testify/require"
 )
-
-func Test_goPathCheck_Mods(t *testing.T) {
-	r := require.New(t)
-	envy.Temp(func() {
-		envy.Set(envy.GO111MODULE, "on")
-
-		run := gentest.NewRunner()
-
-		bb := &bytes.Buffer{}
-		run.WithRun(goPathCheck(&Options{
-			Out: NewWriter(bb),
-		}))
-		r.NoError(run.Run())
-		r.Contains(bb.String(), "You are using Go Modules")
-	})
-}
-
-func Test_goPathCheck_Valid(t *testing.T) {
-	r := require.New(t)
-	envy.Temp(func() {
-		envy.Set(envy.GO111MODULE, "off")
-
-		run := gentest.NewRunner()
-
-		bb := &bytes.Buffer{}
-
-		envy.Set("GOPATH", "/foo")
-		app := meta.New(".")
-		app.Pwd = "/foo/src/bar"
-		run.WithRun(goPathCheck(&Options{
-			App: app,
-			Out: NewWriter(bb),
-		}))
-		r.NoError(run.Run())
-		r.Contains(bb.String(), "operating inside of your GOPATH")
-	})
-}
-
-func Test_goPathCheck_Invalid(t *testing.T) {
-	r := require.New(t)
-	envy.Temp(func() {
-		envy.Set(envy.GO111MODULE, "off")
-
-		run := gentest.NewRunner()
-
-		bb := &bytes.Buffer{}
-
-		envy.Set("GOPATH", "/foo")
-		app := meta.New(".")
-		app.Pwd = "asdfasdf"
-		run.WithRun(goPathCheck(&Options{
-			App: app,
-			Out: NewWriter(bb),
-		}))
-		r.NoError(run.Run())
-		r.Contains(bb.String(), "Things to check")
-	})
-}
 
 func Test_pkg_Mods(t *testing.T) {
 	r := require.New(t)
@@ -84,52 +24,6 @@ func Test_pkg_Mods(t *testing.T) {
 		r.NoError(run.Run())
 
 		r.Contains(bb.String(), "You are using Go Modules")
-	})
-}
-
-func Test_pkg_Dep(t *testing.T) {
-	r := require.New(t)
-	envy.Temp(func() {
-		envy.Set(envy.GO111MODULE, "off")
-
-		bb := &bytes.Buffer{}
-		run := gentest.NewRunner()
-		app := meta.New(".")
-		app.WithDep = true
-		run.LookPathFn = func(s string) (string, error) {
-			return s, nil
-		}
-		run.WithRun(goPkgCheck(&Options{
-			App: app,
-			Out: NewWriter(bb),
-		}))
-
-		r.NoError(run.Run())
-
-		r.Contains(bb.String(), "You are using Dep")
-	})
-}
-
-func Test_pkg_Dep_notFound(t *testing.T) {
-	r := require.New(t)
-	envy.Temp(func() {
-		envy.Set(envy.GO111MODULE, "off")
-
-		bb := &bytes.Buffer{}
-		run := gentest.NewRunner()
-		app := meta.New(".")
-		app.WithDep = true
-		run.LookPathFn = func(s string) (string, error) {
-			return s, fmt.Errorf("oops")
-		}
-		run.WithRun(goPkgCheck(&Options{
-			App: app,
-			Out: NewWriter(bb),
-		}))
-
-		r.NoError(run.Run())
-
-		r.Contains(bb.String(), "`dep` executable could not be found")
 	})
 }
 

@@ -1,5 +1,0 @@
-<%= error() { %>
-You appear to be using Dep but the `dep` executable could not be found in your `PATH`.
-<% } %>
-
-PATH: <%= inspect(PATH) %>

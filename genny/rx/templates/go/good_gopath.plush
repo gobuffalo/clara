@@ -1,3 +1,0 @@
-<%= success() { %>
-You appear to be operating inside of your GOPATH.
-<% } %>
