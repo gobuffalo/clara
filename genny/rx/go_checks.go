@@ -1,16 +1,16 @@
 package rx
 
 import (
-	"go/build"
 	"path/filepath"
 	"runtime"
 	"strings"
 
 	"github.com/gobuffalo/envy"
 	"github.com/gobuffalo/genny"
+	"github.com/gobuffalo/here/there"
 )
 
-var GoMinimums = []string{">=1.12", ">=1.13"}
+var GoMinimums = []string{">=1.13"}
 
 func goCheck(opts *Options) *genny.Generator {
 	t := Tool{
@@ -27,48 +27,26 @@ func goCheck(opts *Options) *genny.Generator {
 		},
 	}
 	g := t.Generator(opts)
-	g.RunFn(goPathCheck(opts))
 	g.RunFn(goPkgCheck(opts))
 	g.RunFn(goPathBinCheck(opts))
 	return g
-}
-
-func goPathCheck(opts *Options) genny.RunFn {
-	return func(r *genny.Runner) error {
-		ctx := Context(opts)
-		opts.Out.Header("Go: Checking GOPATH")
-		if envy.Mods() {
-			return opts.render("go/using_mods.plush", ctx)
-		}
-		src := filepath.Join(envy.GoPath(), "src")
-		if strings.HasPrefix(opts.App.Pwd, src) {
-			return opts.render("go/good_gopath.plush", ctx)
-		}
-		c := build.Default
-		ctx.Set("sources", c.SrcDirs())
-		return opts.render("go/bad_gopath.plush", ctx)
-	}
 }
 
 func goPkgCheck(opts *Options) genny.RunFn {
 	return func(r *genny.Runner) error {
 		opts.Out.Header("Go: Checking Package Management")
 		ctx := Context(opts)
-		if envy.Mods() {
-			ctx.Set("pkg", "Go Modules")
-			ctx.Set("exec", envy.GoBin())
-			return opts.render("go/pkg_found.plush", ctx)
+
+		info, err := there.Current()
+		if err != nil {
+			return err
 		}
-		if opts.App.WithDep {
-			ex, err := r.LookPath("dep")
-			if err != nil {
-				return opts.render("go/dep_not_found.plush", ctx)
-			}
-			ctx.Set("pkg", "Dep")
-			ctx.Set("exec", ex)
-			return opts.render("go/pkg_found.plush", ctx)
+		if len(info.Module.Path) == 0 {
+			return opts.render("go/pkg_not_found.plush", ctx)
 		}
-		return opts.render("go/pkg_not_found.plush", ctx)
+		ctx.Set("pkg", "Go Modules")
+		ctx.Set("exec", envy.GoBin())
+		return opts.render("go/pkg_found.plush", ctx)
 	}
 }
 
