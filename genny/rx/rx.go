@@ -1,7 +1,7 @@
 package rx
 
 import (
-	"github.com/gobuffalo/genny"
+	"github.com/gobuffalo/genny/v2"
 	packr "github.com/gobuffalo/packr/v2"
 )
 

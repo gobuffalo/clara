@@ -4,7 +4,7 @@ import (
 	"regexp"
 	"strings"
 
-	"github.com/gobuffalo/genny"
+	"github.com/gobuffalo/genny/v2"
 )
 
 var MySQLMinimums = []string{">=3.5"}

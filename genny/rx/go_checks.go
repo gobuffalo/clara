@@ -1,12 +1,12 @@
 package rx
 
 import (
+	"os"
 	"path/filepath"
 	"runtime"
 	"strings"
 
-	"github.com/gobuffalo/envy"
-	"github.com/gobuffalo/genny"
+	"github.com/gobuffalo/genny/v2"
 	"github.com/gobuffalo/here/there"
 )
 
@@ -45,7 +45,7 @@ func goPkgCheck(opts *Options) genny.RunFn {
 			return opts.render("go/pkg_not_found.plush", ctx)
 		}
 		ctx.Set("pkg", "Go Modules")
-		ctx.Set("exec", envy.GoBin())
+		ctx.Set("exec", "go")
 		return opts.render("go/pkg_found.plush", ctx)
 	}
 }
@@ -53,10 +53,10 @@ func goPkgCheck(opts *Options) genny.RunFn {
 func goPathBinCheck(opts *Options) genny.RunFn {
 	return func(r *genny.Runner) error {
 		opts.Out.Header("Go: Checking PATH")
-		path := envy.Get("PATH", "")
+		path := os.Getenv("PATH")
 
 		ctx := Context(opts)
-		if strings.Contains(path, filepath.Join(envy.GoPath(), "bin")) {
+		if strings.Contains(path, filepath.Join("go", "bin")) {
 			return opts.render("valid_path.plush", ctx)
 		}
 		return opts.render("invalid_path.plush", ctx)
