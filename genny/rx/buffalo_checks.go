@@ -4,7 +4,7 @@ import (
 	"regexp"
 	"strings"
 
-	"github.com/gobuffalo/genny"
+	"github.com/gobuffalo/genny/v2"
 )
 
 var bvrx = regexp.MustCompile(`v\d+\.\d+\.\d+`)

@@ -4,7 +4,7 @@ import (
 	"regexp"
 	"strings"
 
-	"github.com/gobuffalo/genny"
+	"github.com/gobuffalo/genny/v2"
 )
 
 var PGMinimums = []string{">=9.3", ">=10.0", ">=11.0"}

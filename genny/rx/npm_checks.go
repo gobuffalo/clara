@@ -1,7 +1,7 @@
 package rx
 
 import (
-	"github.com/gobuffalo/genny"
+	"github.com/gobuffalo/genny/v2"
 )
 
 var NpmMinimums = []string{">=6.0.0", ">=7.0.0"}

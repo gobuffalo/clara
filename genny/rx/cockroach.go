@@ -4,7 +4,7 @@ import (
 	"regexp"
 	"strings"
 
-	"github.com/gobuffalo/genny"
+	"github.com/gobuffalo/genny/v2"
 )
 
 var CockroachMinimums = []string{">=1.1.1", ">=2.0.x"}

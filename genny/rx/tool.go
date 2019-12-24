@@ -5,7 +5,7 @@ import (
 	"strings"
 
 	"github.com/Masterminds/semver"
-	"github.com/gobuffalo/genny"
+	"github.com/gobuffalo/genny/v2"
 )
 
 type Tool struct {

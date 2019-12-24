@@ -1,7 +1,7 @@
 package rx
 
 import (
-	"github.com/gobuffalo/genny"
+	"github.com/gobuffalo/genny/v2"
 )
 
 var YarnMinimums = []string{">=1.12"}
