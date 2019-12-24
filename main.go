@@ -5,7 +5,7 @@ import (
 	"log"
 	"time"
 
-	"github.com/gobuffalo/clara/genny/rx"
+	"github.com/gobuffalo/clara/v2/genny/rx"
 	"github.com/gobuffalo/genny/v2"
 	"github.com/gobuffalo/logger"
 	"github.com/gobuffalo/meta"
