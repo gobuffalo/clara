@@ -5,7 +5,7 @@ import (
 	"runtime"
 
 	"github.com/gobuffalo/meta"
-	"github.com/gobuffalo/plush"
+	"github.com/gobuffalo/plush/v4"
 )
 
 type Options struct {
