@@ -4,7 +4,7 @@ import (
 	"os"
 	"strings"
 
-	"github.com/gobuffalo/plush"
+	"github.com/gobuffalo/plush/v4"
 )
 
 func Context(opts interface{}) *plush.Context {
