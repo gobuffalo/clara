@@ -43,8 +43,6 @@ Thank you to the following **GIANTS**:
 
 * [github.com/gobuffalo/packd](https://godoc.org/github.com/gobuffalo/packd)
 
-* [github.com/gobuffalo/packr/v2](https://godoc.org/github.com/gobuffalo/packr/v2)
-
 * [github.com/gobuffalo/plush](https://godoc.org/github.com/gobuffalo/plush)
 
 * [github.com/gobuffalo/tags](https://godoc.org/github.com/gobuffalo/tags)
