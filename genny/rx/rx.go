@@ -1,11 +1,13 @@
 package rx
 
 import (
+	"embed"
+
 	"github.com/gobuffalo/genny/v2"
-	packr "github.com/gobuffalo/packr/v2"
 )
 
-var templates = packr.New("github.com/gobuffalo/clara/genny/rx/templates", "../rx/templates")
+//go:embed templates templates/*/*.plush
+var templates embed.FS
 
 // func init() {
 // 	plush.Helpers.Add("partialFeeder", templates.FindString)
