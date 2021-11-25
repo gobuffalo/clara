@@ -1,6 +1,17 @@
 # Clara
 
+
+[![Go Reference](https://pkg.go.dev/badge/github.com/gobuffalo/clara.svg)](https://pkg.go.dev/github.com/gobuffalo/clara)
+[![Actions Status](https://github.com/gobuffalo/clara/workflows/Tests/badge.svg)](https://github.com/gobuffalo/clara/actions)
+
+
 Clara is a tool for checking your environment for [Go](https://golang.org) and [Buffalo](https://gobuffalo.io) development. It will check things like versions, pathing, etc... and will let you know what needs to be fixed, setup, or updated, in order to have a system that hums along while you develop.
+
+Note that Clara officially supports the last two versions of Go, which at the mement are:
+* 1.16
+* 1.17
+
+Even though it may (or may not) work on the older versions, we encourage you to upgrade your Go development environment.
 
 ## Installation
 
@@ -8,27 +19,29 @@ Clara is a tool for checking your environment for [Go](https://golang.org) and [
 
 Pre-built binaries for most platforms can be found at [https://github.com/gobuffalo/clara/releases](https://github.com/gobuffalo/clara/releases).
 
-### Using Go Get
+### Using Go Install
 
-```bash
-$ go get -u github.com/gobuffalo/clara
+For go version 1.16 or higher,
+
+```console
+$ go install github.com/gobuffalo/clara/v2@latest
 ```
 
 ### From Source
 
-```bash
+```console
 $ make install
 ```
 
 ## Usage
 
-```bash
+```console
 $ clara
 ```
 
 ### Example Output
 
-```bash
+```console
 $ clara
 
 -> Go: Checking installation

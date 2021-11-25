@@ -20,9 +20,3 @@ build:
 test:
 	$(GO_BIN) test -cover -tags ${TAGS} ./...
 	make tidy
-
-packr:
-	$(GO_BIN) get github.com/gobuffalo/packr/v2/packr2
-	packr2
-	make tidy
-

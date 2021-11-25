@@ -46,13 +46,13 @@ func (t Tool) Generator(opts *Options) *genny.Generator {
 		opts.Out.Header(fmt.Sprintf("%s: Checking installation", t.Name))
 		bin, err := r.LookPath(t.Bin)
 		if err != nil {
-			x, err := templates.FindString("exec_not_found.plush")
+			x, err := templateFeeder("exec_not_found.plush")
 			if err != nil {
 				return opts.Out.RenderE(err)
 			}
 			return opts.Out.Render(x, ctx)
 		}
-		x, err := templates.FindString("exec_found.plush")
+		x, err := templateFeeder("exec_found.plush")
 		if err != nil {
 			return opts.Out.RenderE(err)
 		}
