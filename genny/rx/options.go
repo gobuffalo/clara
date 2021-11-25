@@ -4,12 +4,12 @@ import (
 	"os"
 	"runtime"
 
-	"github.com/gobuffalo/meta/v2"
+	"github.com/gobuffalo/meta"
 	"github.com/gobuffalo/plush/v4"
 )
 
 type Options struct {
-	App         *meta.App
+	App         meta.App
 	Versions    StringMap
 	Out         Writer
 	SkipBuffalo bool
@@ -19,12 +19,8 @@ type Options struct {
 
 // Validate that options are usuable
 func (opts *Options) Validate() error {
-	if opts.App == nil || opts.App.Info.IsZero() {
-		var err error
-		opts.App, err = meta.NewDir(".")
-		if err != nil {
-			return err
-		}
+	if opts.App.IsZero() {
+		opts.App = meta.New(".")
 	}
 	if opts.Out.Writer == nil {
 		opts.Out = NewWriter(os.Stdout)
