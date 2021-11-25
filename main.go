@@ -8,7 +8,7 @@ import (
 	"github.com/gobuffalo/clara/v2/genny/rx"
 	"github.com/gobuffalo/genny/v2"
 	"github.com/gobuffalo/logger"
-	"github.com/gobuffalo/meta/v2"
+	"github.com/gobuffalo/meta"
 	"github.com/spf13/pflag"
 )
 
@@ -47,12 +47,8 @@ func run() error {
 		run.Logger = logger.New(logger.DebugLevel)
 	}
 
-	var err error
 	opts := options.Options
-	opts.App, err = meta.NewDir(".")
-	if err != nil {
-		return err
-	}
+	opts.App = meta.New(".")
 	if err := run.WithNew(rx.New(opts)); err != nil {
 		return err
 	}
