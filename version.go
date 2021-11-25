@@ -1,4 +1,4 @@
 package main
 
 // Version of main
-var Version = "v2.0.4"
+var Version = "v2.0.5"
