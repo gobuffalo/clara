@@ -3,7 +3,6 @@ package rx
 import (
 	"os"
 	"path/filepath"
-	"runtime"
 	"strings"
 
 	"github.com/gobuffalo/genny/v2"
@@ -19,10 +18,14 @@ func goCheck(opts *Options) *genny.Generator {
 		Minimum: GoMinimums,
 		Partial: "go/_help.plush",
 		Version: func(r *genny.Runner) (string, error) {
-			v, ok := opts.Versions.Load("go")
-			if !ok {
-				v = runtime.Version()
+			if v, ok := opts.Versions.Load("go"); ok {
+				return v, nil
 			}
+			v, err := cmdVersion(r, "go", "version")
+			if err != nil {
+				return "", err
+			}
+			v = strings.Split(v, " ")[2] // go version go1.17.8 linux/amd64
 			return strings.TrimPrefix(v, "go"), nil
 		},
 	}
