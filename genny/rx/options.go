@@ -2,7 +2,6 @@ package rx
 
 import (
 	"os"
-	"runtime"
 
 	"github.com/gobuffalo/meta"
 	"github.com/gobuffalo/plush/v4"
@@ -24,9 +23,6 @@ func (opts *Options) Validate() error {
 	}
 	if opts.Out.Writer == nil {
 		opts.Out = NewWriter(os.Stdout)
-	}
-	if _, ok := opts.Versions.Load("go"); !ok {
-		opts.Versions.Store("go", runtime.Version())
 	}
 	return nil
 }
