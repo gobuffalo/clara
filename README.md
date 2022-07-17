@@ -7,7 +7,7 @@
 
 Clara is a tool for checking your environment for [Go](https://golang.org) and [Buffalo](https://gobuffalo.io) development. It will check things like versions, pathing, etc... and will let you know what needs to be fixed, setup, or updated, in order to have a system that hums along while you develop.
 
-Note that Clara officially supports the last two versions of Go, which at the mement are:
+Note that Clara officially supports the last two versions of Go, which at the moment are:
 * 1.16
 * 1.17
 
