@@ -8,8 +8,8 @@
 Clara is a tool for checking your environment for [Go](https://golang.org) and [Buffalo](https://gobuffalo.io) development. It will check things like versions, pathing, etc... and will let you know what needs to be fixed, setup, or updated, in order to have a system that hums along while you develop.
 
 Note that Clara officially supports the last two versions of Go, which at the mement are:
-* 1.16
 * 1.17
+* 1.18
 
 Even though it may (or may not) work on the older versions, we encourage you to upgrade your Go development environment.
 
@@ -21,7 +21,7 @@ Pre-built binaries for most platforms can be found at [https://github.com/gobuff
 
 ### Using Go Install
 
-For go version 1.16 or higher,
+For go version 1.17 or higher,
 
 ```console
 $ go install github.com/gobuffalo/clara/v2@latest
