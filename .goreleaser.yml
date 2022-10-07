@@ -1,6 +1,5 @@
 builds:
-  -
-    main: ./main.go
+  - main: ./main.go
     env:
       - CGO_ENABLED=0
     ldflags:
@@ -18,8 +17,7 @@ builds:
       - 6
       - 7
 archives:
-  -
-    replacements:
+  - replacements:
       '386': i386
       darwin: Darwin
       linux: Linux
@@ -36,8 +34,7 @@ changelog:
       - '^docs:'
       - '^test:'
 brews:
-  -
-    name: 'clara'
+  - name: 'clara'
     tap:
       owner: 'gobuffalo'
       name: 'homebrew-tap'
